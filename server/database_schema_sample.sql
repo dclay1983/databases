@@ -1,21 +1,20 @@
-#
-# TABLE STRUCTURE FOR: messages
-#
 set foreign_key_checks=0;
 CREATE DATABASE IF NOT EXISTS chat_test;
 
 USE chat_test;
 DROP TABLE IF EXISTS `messages`;
 
-CREATE TABLE `messages` (
+CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
   `time` datetime NOT NULL,
   `text` text COLLATE utf8_unicode_ci NOT NULL,
+
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `room_id` (`room_id`),
+
   CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=401 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -421,11 +420,6 @@ INSERT INTO `messages` (`id`, `user_id`, `room_id`, `time`, `text`) VALUES (398,
 INSERT INTO `messages` (`id`, `user_id`, `room_id`, `time`, `text`) VALUES (399, 14, 3, '1991-03-17 15:34:59', 'After a time there could be beheaded, and that if something wasn\'t done about it while the rest of my life.\' \'You are all pardoned.\' \'Come, THAT\'S a good deal worse off than before, as the rest.');
 INSERT INTO `messages` (`id`, `user_id`, `room_id`, `time`, `text`) VALUES (400, 12, 4, '1996-04-28 21:19:22', 'Alice: \'I don\'t think it\'s at all anxious to have finished,\' said the Dormouse; \'VERY ill.\' Alice tried to look for her, and the pair of boots every Christmas.\' And she went on talking: \'Dear, dear!.');
 
-
-#
-# TABLE STRUCTURE FOR: rooms
-#
-
 DROP TABLE IF EXISTS `rooms`;
 
 CREATE TABLE `rooms` (
@@ -439,11 +433,6 @@ INSERT INTO `rooms` (`id`, `name`) VALUES (2, 'DarkViolet');
 INSERT INTO `rooms` (`id`, `name`) VALUES (3, 'Moccasin');
 INSERT INTO `rooms` (`id`, `name`) VALUES (4, 'SteelBlue');
 INSERT INTO `rooms` (`id`, `name`) VALUES (5, 'DimGray');
-
-
-#
-# TABLE STRUCTURE FOR: users
-#
 
 DROP TABLE IF EXISTS `users`;
 
@@ -473,5 +462,3 @@ INSERT INTO `users` (`id`, `name`) VALUES (17, 'abbott.jimmy');
 INSERT INTO `users` (`id`, `name`) VALUES (18, 'isabella58');
 INSERT INTO `users` (`id`, `name`) VALUES (19, 'lsteuber');
 INSERT INTO `users` (`id`, `name`) VALUES (20, 'karlie.mayert');
-
-
