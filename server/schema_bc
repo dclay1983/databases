@@ -1,29 +1,43 @@
-CREATE DATABASE chat;
+set foreign_key_checks=0;
+CREATE DATABASE IF NOT EXISTS chat;
 
 USE chat;
 
 /* Create other tables and define schemas for them here! */
 
-CREATE TABLE Messages (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  user_id BIGINT DEFAULT NULL REFERENCES User '(id)',
-  room_id BIGINT DEFAULT NULL REFERENCES Room '(id)',
-  time DATETIME DEFAULT NULL,
-  text TEXT DEFAULT NULL
-);
 
-CREATE TABLE Users (
-  id BIGINT DEFAULT NULL PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(20) DEFAULT NULL
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT,
+  name VARCHAR(20) NOT NULL,
+
+  PRIMARY KEY (id)
 );
 
 
-CREATE TABLE Room (
-  id BIGINT AUTO_INCREMENT,
-  name VARCHAR(20) DEFAULT NULL,
-  UNIQUE '(id)'
-)
+CREATE TABLE IF NOT EXISTS rooms (
+  id INT AUTO_INCREMENT,
+  name VARCHAR(20) NOT NULL,
 
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS messages (
+  id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  room_id INT NOT NULL,
+  time DATETIME NOT NULL,
+  text TEXT NOT NULL,
+
+  PRIMARY KEY(id),
+  INDEX (user_id),
+  INDEX (room_id),
+
+  FOREIGN KEY (user_id)
+    REFERENCES users(id),
+
+  FOREIGN KEY (room_id)
+    REFERENCES rooms(id)
+);
 
 
 
