@@ -17,7 +17,7 @@ models.exports = {
     // a function which can be used to insert a user into the database
     create: function (user, callback) {
       let q = 'INSERT INTO users(name) VALUES(?);';
-      db.dbConnection.query(q, user, (err, res) => {
+      db.dbConnection.query(q, [user], (err, res) => {
         if (err) {
           callback(err);
         } else {

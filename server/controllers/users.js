@@ -2,12 +2,27 @@ var models = require('../models');
 
 module.exports = {
   users: {
-    // Ditto as above
+    // a function which handles a get request for all users
     get: function (req, res) {
-
+      models.users.getAll((err, results) => {
+        if (err) {
+          next(err);
+        } else {
+          res.send(results);
+        }
+      });
     },
-    post: function (req, res) {
 
+    // a function which handles posting a user to the database
+    post: function (req, res) {
+      user = req.body[user];
+      models.users.create(user, (err, results) => {
+        if (err) {
+          next(err);
+        } else {
+          res.send(results);
+        }
+      });
     }
   }
 };

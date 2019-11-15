@@ -17,7 +17,7 @@ models.exports = {
     // a function which can be used to insert a room into the database
     create: function (room, callback) {
       let q = 'INSERT INTO rooms(name) VALUES(?);';
-      db.dbConnection.query(q, room, (err, res) => {
+      db.dbConnection.query(q, [room], (err, res) => {
         if (err) {
           callback(err);
         } else {
